@@ -15,6 +15,10 @@ Each of the folders in this repository corresponds to a different step in the de
 - maps
 - media
 - main
+- main [only coverage]
+- main [only path planning]
+- main [3D]
+- 
 
 ## Contacts
 
