@@ -11,15 +11,16 @@ A brief descritpion of the project, as well as an explaantion of each folder rol
 ## Repository folders
 
 Each of the folders in this repository corresponds to a different step in the development process of the exploration algorithm:
-- models
-- maps
-- media
-- main
-- main [only coverage]
-- main [only path planning]
-- main [3D]
-- 
+- models: the folder contains the data of the trained models. Currently, in the folder are uploaded only three models (two for the path planning agent and one for the coverage one), which are amongst the best ones obtained during the training phase;
+- maps: 
+- media:
+- main:
+- main [only coverage]:
+- main [only path planning]:
+- main [3D]:
+- training coverage:
+- training path planning:
 
 ## Contacts
 
-For any other question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it or here on GitHub (you can also contact us through our personal profiles @gbattocletti and @riccardoUrb.
+For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it. Here on GitHub you can also contact us through our personal profiles https://github.com/gbattocletti and https://github.com/RiccardoUrb.
