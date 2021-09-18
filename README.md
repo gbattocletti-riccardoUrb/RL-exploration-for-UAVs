@@ -12,7 +12,7 @@ A brief descritpion of the project, as well as an explaantion of each folder rol
 
 Each of the folders in this repository corresponds to a different step in the development process of the exploration algorithm:
 - models: the folder contains the data of the trained models. Currently, in the folder are uploaded only three models (two for the path planning agent and one for the coverage one), which are amongst the best ones obtained during the training phase;
-- maps: 
+- maps: contains the map datasets used for the training and validation of the RL models. The folder contains several training datasets, which have been built over time to try and find the optimal map type in order to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
 - media:
 - main:
 - main [only coverage]:
@@ -23,4 +23,4 @@ Each of the folders in this repository corresponds to a different step in the de
 
 ## Contacts
 
-For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it. Here on GitHub you can also contact us through our personal profiles https://github.com/gbattocletti and https://github.com/RiccardoUrb.
+For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it. Here on GitHub you can also visit our personal profiles https://github.com/gbattocletti and https://github.com/RiccardoUrb.
