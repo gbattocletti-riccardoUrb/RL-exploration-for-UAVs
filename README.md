@@ -27,10 +27,15 @@ THe exploration algorithm works by continuously calling in action the two agents
 ## Repository folders
 
 This repository contains several folder, each one corresponding to a different development stage of the algorithm:
-- main:
-- main [only coverage]:
-- main [only path planning]:
-- main [3D]:
+- main: main simulation of the complete exploration algorithm. The main file allows to select the desired map, the path planning and coverage agents, and some other parameters;
+- main [only coverage]: simplified simulation in which the focus is on the coverage agent. The path planning agent is replaced by a simpler (and less efficient) path planning algorithm. This allows to speed up the simulation runtime and focus on the evaluation of the coverage performances;
+- main [only path planning]: simplified simulation in which the focus is on the path planning agent. In this case, the coverage agent is replaced by a random placement (or manual placement) of the target points of each UAV. This way, the focus is on the path planning agent behaviour and on the obstacle avoidance effectiveness;
+- main [3D]: blabla
+
+<p align="center">
+	<img src="/media/3D_sim.png" alt="3D simulation with height slicing" width="500"/>
+</p>
+
 - training coverage:
 - training path planning:
 - models: the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
