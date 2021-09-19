@@ -30,7 +30,7 @@ This repository contains several folder, each one corresponding to a different d
 - main: main simulation of the complete exploration algorithm. The main file allows to select the desired map, the path planning and coverage agents, and some other parameters;
 - main [only coverage]: simplified simulation in which the focus is on the coverage agent. The path planning agent is replaced by a simpler (and less efficient) path planning algorithm. This allows to speed up the simulation runtime and focus on the evaluation of the coverage performances;
 - main [only path planning]: simplified simulation in which the focus is on the path planning agent. In this case, the coverage agent is replaced by a random placement (or manual placement) of the target points of each UAV. This way, the focus is on the path planning agent behaviour and on the obstacle avoidance effectiveness;
-- main [3D]: blabla
+- main [3D]: this folders contains a first implementation of the algorithm in a 3D scenario. All the previous simulations are run in a 2D environment. In this folder, a simplified approach to the exploration of a 3D environment is implemented and analysed. The approach used is to "slice" the environment along the *z* axis and place one UAV on each height level. Each UAV only moves at a fixed height, behaving as if it was in a 2D environment. This approach is clearly sub-optimal, but allows to easily extend the 2D algorithm to a real-world scenario. An example of 3D exploration is shown below.
 
 <p align="center">
 	<img src="/media/3D_sim.png" alt="3D simulation with height slicing" width="500"/>
