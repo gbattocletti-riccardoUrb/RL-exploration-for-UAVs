@@ -13,13 +13,13 @@ The main goal of the project is to use Reinforcement Learning (RL) to implement 
 The case study scenario assumes that a number *n* of UAVs is placed in some given initial locations inside of an unknown region. The task of the UAV fleet is to explore (i.e. obesrve through the use of sensors and cameras) as much as possible of the environment in the least amount of time. The approach taken during the development of the exploration algorithm has been to split the exploration task in two parts. The first part is called *coverage* algorithm and has the task of coordinating the exploration process. A copy of this algorithm runs on each of the UAVs; each UAV is responsible for the decision of its own target location. Each UAV computes its own target point by taking into account the avaliable data about environment shape, obstacle position and other UAVs location. By accessing these info, each UAV computes its own target location by running the *coverage agent*, i.e. a properly RL-trained Neural Network (NN). The image below shows how a fleet of 4 UAVs exploit the coverage agent to generate 4 different target locations.
 
 <p align="center">
-  <img src="/media/coverage_output.png" alt="Coverage NN output" width="500"/>
+	<img src="/media/coverage_output.png" alt="Coverage NN output" width="500"/>
 </p>
  
 Once each UAV has its target point, the second piece of algorithm, the *path planning algorithm*, is called into action. The path planning algorithm is composed by a second RL-trained Neural Network called *path planning agent*. This second agent is able to compute a suitable flight trajectory to lead the UAV to its target location avoiding obstacles and other UAVs. The path planning agnet works in real time so that obstacles that are detected during flight can be immediately taken into account to update the trajectory and avoid collisions with them. An example of trajectory planning is shown below (red line is the trajectory, which starts from the red dot which represents one UAV location. Black squares are known obstacles and grey ones are unknown obstacles).
 
 <p align="center">
-  <img src="/media/sim1_1.png" alt="Path Planning trajectory" width="300"/>
+	<img src="/media/sim1_1.png" alt="Path Planning trajectory" width="300"/>
 </p>
 
 THe exploration algorithm works by continuously calling in action the two agents described above. The symultaneous use of the two pieces of algorithm result in an effective exploration algorithm, as can be seen in the the simulations in the *media* folder and in the numerical results discussed in the paper.
@@ -27,14 +27,14 @@ THe exploration algorithm works by continuously calling in action the two agents
 ## Repository folders
 
 This repository contains several folder, each one corresponding to a different development stage of the algorithm:
-- models: the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
-- maps: the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
 - main:
 - main [only coverage]:
 - main [only path planning]:
 - main [3D]:
 - training coverage:
 - training path planning:
+- models: the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
+- maps: the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
 - media: lastly, the *media* folder contains some images and videos that show the results obtained. Some more images and plots (which illustrate the performance quality of the algorithm) can be found in the aforementioned paper on ResearchGate.
 
 It is worth mentioning that, during the training process, we used the website *wandb* (aka "Weight and Biases", https://wandb.ai/) to log some useful training information. Moreover, we used the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. In the same way, it could be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
