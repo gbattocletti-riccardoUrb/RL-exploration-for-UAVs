@@ -12,8 +12,13 @@ The main goal of the project is to use Reinforcement Learning (RL) to implement 
 
 The case study scenario assumes that a number *n* of UAVs is placed in some given initial locations inside of an unknown region. The task of the UAV fleet is to explore (i.e. obesrve through the use of sensors and cameras) as much as possible of the environment in the least amount of time. The approach taken during the development of the exploration algorithm has been to split the exploration task in two parts. The first part is called *coverage* algorithm and has the task of coordinating the exploration process. A copy of this algorithm runs on each of the UAVs; each UAV is responsible for the decision of its own target location. Each UAV computes its own target point by taking into account the avaliable data about environment shape, obstacle position and other UAVs location. By accessing these info, each UAV computes its own target location by running the *coverage agent*, i.e. a properly RL-trained Neural Network (NN). The image below shows how a fleet of 4 UAVs exploit the coverage agent to generate 4 different target locations.
 
- ![Coverage NN output](/Media/coverage_output.png)
+<p align="center">
+  <img src="/media/coverage_output.png" alt="Coverage NN output" width="500"/>
+</p>
  
+Once each UAV has its target point, the second piece of algorithm, the *path planning algorithm*, is called into action. The path planning algorithm is composed by a second RL-trained Neural Network called *path planning agent*. This second agent is able to compute a suitable flight trajectory to lead the UAV to its target location avoiding obstacles and other UAVs. The path planning agnet works in real time so that obstacles that are detected during flight can be immediately taken into account to update the trajectory and avoid collisions with them. 
+
+THe exploration algorithm works by continuously calling in action the two agents described above. The symultaneous use of the two pieces of algorithm result in an effective exploration algorithm, as 
 
 ## Repository folders
 
