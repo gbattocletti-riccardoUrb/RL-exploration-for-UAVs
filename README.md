@@ -2,9 +2,9 @@
 
 ## Intro 
 
-This repository contains a collection of the files produced during the Master Thesis in Mechatronic Engineering we pursued in 2021 at Politecnico di Torino (Italy). The title of the thesis is "Reinforcement Learning-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments". A good overview of the project can be found in the paper we presented at the 2021 AIAA forum. In the paper, the main idea behind the project is explained, along with some technical detail about the development and implementation of the algorithm. Moreover, all the relevant results are presented and discussed. The paper is available on ResearchGate at https://www.researchgate.net/publication/353530217_RL-based_Path_Planning_for_Autonomous_Aerial_Vehicles_in_Unknown_Environments. If you want a more in-depth analysis of the algorithm you can contact us and ask for a copy of the thesis, where the development and implementation of the algorithm is discussed in detail.
+This repository contains a collection of the files produced during the Master Thesis in Mechatronic Engineering we pursued in 2021 at Politecnico di Torino (Italy). The title of the thesis is "Reinforcement Learning-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments". A good overview of the project can be found in the paper we presented at the 2021 AIAA forum. In the paper, the main idea behind the project is explained, along with some technical detail about the development and implementation of the algorithm. Moreover, all the relevant results are presented and discussed. The paper is available on [ResearchGate](https://www.researchgate.net/publication/353530217_RL-based_Path_Planning_for_Autonomous_Aerial_Vehicles_in_Unknown_Environments). If you want a more in-depth analysis of the algorithm you can contact us and ask for a copy of the thesis, where the development and implementation of the algorithm is discussed in detail.
 
-The files collected in this folder regard the simulation environment creation, the RL agents training and the simulation of the UAVs operations used to produce all the numeric results. Below, a brief description of each folder role inside the project can be found.
+The files collected in this folder regard the simulation environment creation, the RL agents training and the simulation of the UAVs operations used to produce all the numeric results. Below, a brief description of the project - and then of each folder role in it - can be found.
 
 ## Project description
 
@@ -16,9 +16,13 @@ The case study scenario assumes that a number *n* of UAVs is placed in some give
   <img src="/media/coverage_output.png" alt="Coverage NN output" width="500"/>
 </p>
  
-Once each UAV has its target point, the second piece of algorithm, the *path planning algorithm*, is called into action. The path planning algorithm is composed by a second RL-trained Neural Network called *path planning agent*. This second agent is able to compute a suitable flight trajectory to lead the UAV to its target location avoiding obstacles and other UAVs. The path planning agnet works in real time so that obstacles that are detected during flight can be immediately taken into account to update the trajectory and avoid collisions with them. 
+Once each UAV has its target point, the second piece of algorithm, the *path planning algorithm*, is called into action. The path planning algorithm is composed by a second RL-trained Neural Network called *path planning agent*. This second agent is able to compute a suitable flight trajectory to lead the UAV to its target location avoiding obstacles and other UAVs. The path planning agnet works in real time so that obstacles that are detected during flight can be immediately taken into account to update the trajectory and avoid collisions with them. An example of trajectory planning is shown below (red line is the trajectory, which starts from the red dot which represents one UAV location. Black squares are known obstacles and grey ones are unknown obstacles).
 
-THe exploration algorithm works by continuously calling in action the two agents described above. The symultaneous use of the two pieces of algorithm result in an effective exploration algorithm, as 
+<p align="center">
+  <img src="/media/sim1_1.png" alt="Path Planning trajectory" width="300"/>
+</p>
+
+THe exploration algorithm works by continuously calling in action the two agents described above. The symultaneous use of the two pieces of algorithm result in an effective exploration algorithm, as can be seen in the the simulations in the *media* folder and in the numerical results discussed in the paper.
 
 ## Repository folders
 
