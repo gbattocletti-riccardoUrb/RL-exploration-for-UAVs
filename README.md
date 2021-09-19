@@ -27,20 +27,20 @@ THe exploration algorithm works by continuously calling in action the two agents
 ## Repository folders
 
 This repository contains several folder, each one corresponding to a different development stage of the algorithm:
-- main: main simulation of the complete exploration algorithm. The main file allows to select the desired map, the path planning and coverage agents, and some other parameters;
-- main [only coverage]: simplified simulation in which the focus is on the coverage agent. The path planning agent is replaced by a simpler (and less efficient) path planning algorithm. This allows to speed up the simulation runtime and focus on the evaluation of the coverage performances;
-- main [only path planning]: simplified simulation in which the focus is on the path planning agent. In this case, the coverage agent is replaced by a random placement (or manual placement) of the target points of each UAV. This way, the focus is on the path planning agent behaviour and on the obstacle avoidance effectiveness;
-- main [3D]: this folders contains a first implementation of the algorithm in a 3D scenario. All the previous simulations are run in a 2D environment. In this folder, a simplified approach to the exploration of a 3D environment is implemented and analysed. The approach used is to "slice" the environment along the *z* axis and place one UAV on each height level. Each UAV only moves at a fixed height, behaving as if it was in a 2D environment. This approach is clearly sub-optimal, but allows to easily extend the 2D algorithm to a real-world scenario. An example of 3D exploration is shown below.
+- **main:** main simulation of the complete exploration algorithm. The main file allows to select the desired map, the path planning and coverage agents, and some other parameters;
+- **main [only coverage]:** simplified simulation in which the focus is on the coverage agent. The path planning agent is replaced by a simpler (and less efficient) path planning algorithm. This allows to speed up the simulation runtime and focus on the evaluation of the coverage performances;
+- **main [only path planning]:** simplified simulation in which the focus is on the path planning agent. In this case, the coverage agent is replaced by a random placement (or manual placement) of the target points of each UAV. This way, the focus is on the path planning agent behaviour and on the obstacle avoidance effectiveness;
+- **main [3D]:** this folders contains a first implementation of the algorithm in a 3D scenario. All the previous simulations are run in a 2D environment. In this folder, a simplified approach to the exploration of a 3D environment is implemented and analysed. The approach used is to "slice" the environment along the *z* axis and place one UAV on each height level. Each UAV only moves at a fixed height, behaving as if it was in a 2D environment. This approach is clearly sub-optimal, but allows to easily extend the 2D algorithm to a real-world scenario. An example of 3D exploration is shown below.
 
 <p align="center">
 	<img src="/media/3D_sim.png" alt="3D simulation with height slicing" width="500"/>
 </p>
 
-- training coverage:
-- training path planning:
-- models: the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
-- maps: the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
-- media: lastly, the *media* folder contains some images and videos that show the results obtained. Some more images and plots (which illustrate the performance quality of the algorithm) can be found in the aforementioned paper on ResearchGate.
+- **training coverage:** [TO DO]
+- **training path planning:** [TO DO]
+- **models:** the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
+- **maps:** the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
+- **media:** lastly, the *media* folder contains some images and videos that show the results obtained. Some more images and plots (which illustrate the performance quality of the algorithm) can be found in the aforementioned paper on ResearchGate.
 
 It is worth mentioning that, during the training process, we used the website *wandb* (aka "Weight and Biases", https://wandb.ai/) to log some useful training information. Moreover, we used the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. In the same way, it could be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
 
