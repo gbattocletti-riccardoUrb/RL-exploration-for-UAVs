@@ -36,9 +36,9 @@ This repository contains several folder, each one corresponding to a different d
 	<img src="/media/3D_sim.png" alt="3D simulation with height slicing" width="500"/>
 </p>
 
-- **training coverage:** [TO DO]
-- **training path planning:** [TO DO]
-- **models:** the folder contains some trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
+- **training path planning:** this folder contains the files containing the tensorflow code used to train the path planning agent. This includes the Neural Network architecture definition, functions to manage state and reward, and the routine to perform the SGD and backprop operations;
+- **training coverage:** same as above but for the coverage agent. In this case, the issue is that the training is very slow and should be improved/optimised. At the moment, in fact, the amount of time to reach a reasonable number of training episodes is *very* large (many days of training). Future work on this project should focus on this section. In addition to the speed up required by the coverage agent training, it could be necessary to  review the coverage agent structure and training strategy;
+- **models:** the folder contains the trained models (i.e., trained RL agents). Currently, in the folder are uploaded only a few models, which are some of the best ones obtained during the training phase. These models are the ones that can be used during the simulations in the *main* folders;
 - **maps:** the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
 - **media:** lastly, the *media* folder contains some images and videos that show the results obtained. Some more images and plots (which illustrate the performance quality of the algorithm) can be found in the aforementioned paper on ResearchGate.
 
