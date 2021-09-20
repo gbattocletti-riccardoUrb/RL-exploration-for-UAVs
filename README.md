@@ -42,6 +42,8 @@ This repository contains several folder, each one corresponding to a different d
 - **maps:** the folder contains the map datasets used for the training and validation of the algorithm. The folder contains several training datasets, which have been built over time to try and find the optimal map type to obtain a faster and more reliable training process. A set of validation maps is also present. The folder also contains the MATLAB files used to generate the maps. They can be used to generate new training and validation/simulation maps;
 - **media:** lastly, the media folder contains some images and videos that show the results obtained. Some more images and plots (which illustrate the performance quality of the algorithm) can be found in the aforementioned paper on ResearchGate.
 
+## Notes
+
 It is worth mentioning that, during the training process, we used the website *wandb* (aka "Weight and Biases", https://wandb.ai/) to log some useful training information. Moreover, we used the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. In the same way, it could be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
 
 ## Contacts
