@@ -3,7 +3,7 @@ import math
 import scipy.stats as stats
 import scipy.ndimage.filters as filters
 import scipy.ndimage.morphology as morphology
-# from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans
 from scipy import interpolate
 from map_class import Map
 import cv2
@@ -12,7 +12,7 @@ import time
 import imutils
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 import tensorflow as tf
 # tf.keras.backend.set_floatx('float32')
 
@@ -23,7 +23,7 @@ class Drone:
         self.position = np.empty([0, 2], dtype='float16')       # current position of the drone
         self.index_position = np.array([0, 0], dtype='int16')
         self.orientation = 0                                    # orientation in radians
-        self.position_history = np.empty([0,2], dtype='float16')# vector containing all the past values of the drone position
+        self.position_history = np.empty([0, 2], dtype='float16')# vector containing all the past values of the drone position
         self.radius = 0.2                                       # drone dimensions [m]
         self.speed = np.zeros([2])                              # current speed
         self.max_speed = None                                   # max abs of the speed vector
@@ -113,7 +113,6 @@ class Drone:
         self.max_steps_single_goal = None                       # max number of steps with a single goal
         self.coverage_obstacle_matrix = None
         self.last_observation = None
-
 
     def __str__(self):  # overwrites print. This way the command print(drone_obj) can be used to inspect the current position and objective of a certain drone
         x = 0
@@ -261,7 +260,7 @@ class Drone:
         self.max_index_x = int(math.floor(self.map_dimension_x / self.map_resolution_x)) # alternative: self.n_cell_x-1
         self.min_index_y = 0
         self.max_index_y = int(math.floor(self.map_dimension_y / self.map_resolution_x)) # alternative: self.n_cell_y-1
-        #initialize position history vector
+        # initialize position history vector
         # self.position_history = np.zeros([1, 2])
         # self.position_history[0, :] = self.position
         # initialize potential world as matrix of zeros
@@ -362,7 +361,7 @@ class Drone:
         dist_x = dist_x - min(dist_x)                                                   # to have the border of the distribution = 0
         dist_y = dist_y - min(dist_y.T)                                                 # same as line above
         dist_x = dist_x * math.sqrt(peak_value)/max(dist_x)           # rescale the distribution to match the desired max value
-        dist_y = dist_y * math.sqrt(peak_value)/max(dist_y.T)         #  NOTE: max could be the wrong function to be used here (and also in the line above)
+        dist_y = dist_y * math.sqrt(peak_value)/max(dist_y.T)         # NOTE: max could be the wrong function to be used here (and also in the line above)
         self.coverage_obstacle_matrix = dist_x * dist_y
 
     def compute_mobile_obstacle_matrices(self):
@@ -388,7 +387,7 @@ class Drone:
             dist_x = dist_x - min(dist_x)                           # to have the border of the distribution = 0
             dist_y = dist_y - min(dist_y.T)                           # same as line above
             dist_x = dist_x * math.sqrt(self.mobile_matrix_peak_value)/max(dist_x)     # rescale the distribution to match the desired max value
-            dist_y = dist_y * math.sqrt(self.mobile_matrix_peak_value)/max(dist_y.T)     #  NOTE: max could be the wrong function to be used here (and also in the line above)
+            dist_y = dist_y * math.sqrt(self.mobile_matrix_peak_value)/max(dist_y.T)     # NOTE: max could be the wrong function to be used here (and also in the line above)
             self.mobile_obstacle_matrix[ii,:,:] = dist_x*dist_y
 
     def compute_fixed_obstacle_matrix(self):
@@ -410,7 +409,7 @@ class Drone:
         dist_x = dist_x - min(dist_x)                                                   # to have the border of the distribution = 0
         dist_y = dist_y - min(dist_y.T)                                                 # same as line above
         dist_x = dist_x * math.sqrt(self.fixed_matrix_peak_value)/max(dist_x)           # rescale the distribution to match the desired max value
-        dist_y = dist_y * math.sqrt(self.fixed_matrix_peak_value)/max(dist_y.T)         #  NOTE: max could be the wrong function to be used here (and also in the line above)
+        dist_y = dist_y * math.sqrt(self.fixed_matrix_peak_value)/max(dist_y.T)         # NOTE: max could be the wrong function to be used here (and also in the line above)
         self.fixed_obstacle_matrix = dist_x * dist_y                                    # the result is a matrix with n_points_x columns (x_coordinate axis) and n_points_y rows (y_coordinate axis)
 
     def compute_local_minima_matrix(self):
@@ -691,8 +690,9 @@ class Drone:
             state = self.observe()
             state = tf.expand_dims(tf.convert_to_tensor(state), 0)
             goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-            goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-            angle = self.path_planning_model([state, goal_distance_tf])
+            # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+            # angle = self.path_planning_model([state, goal_distance_tf])
+            angle = self.path_planning_model(state)
             self.orientation = angle
             self.speed[x] = self.max_speed * math.cos(angle)
             self.speed[y] = self.max_speed * math.sin(angle)
@@ -728,9 +728,10 @@ class Drone:
         else:
             state = self.local_minima_observe()
             state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-            goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-            goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-            angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+            # goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
+            # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+            # angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+            angle = self.local_minima_path_planning_model(state)
             self.orientation = angle
             self.speed[x] = self.max_speed * math.cos(angle)
             self.speed[y] = self.max_speed * math.sin(angle)
@@ -793,7 +794,6 @@ class Drone:
         # if self.potential_field_map[self.pos2index(new_goal[0]), self.pos2index(new_goal[1])] > 100:
         self.old_goal = self.goal  # stores previous goal in memory
         self.goal = new_goal
-        print(new_goal)
             # self.update_attractive_layer()
         # else:
         #     pass
@@ -1032,9 +1032,10 @@ class Drone:
             if ii % steps == 0:
                 state = self.predict(position_x, position_y, self.local_minima_observation_size)
                 state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-                goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-                goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-                angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+                # goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
+                # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+                # angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+                angle = self.local_minima_path_planning_model(state)
                 position_x = self.check_boundaries(position_x + predict_increment * math.cos(angle), 'x_coordinate')
                 position_y = self.check_boundaries(position_y + predict_increment * math.sin(angle), 'y_coordinate')
                 control_points_x.append(position_x)
@@ -1042,9 +1043,10 @@ class Drone:
             else:
                 state = self.predict(position_x, position_y, self.local_minima_observation_size)
                 state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-                goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-                goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-                angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+                # goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
+                # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+                # angle = self.local_minima_path_planning_model([state, goal_distance_tf])
+                angle = self.local_minima_path_planning_model(state)
                 position_x = self.check_boundaries(position_x + predict_increment * math.cos(angle), 'x_coordinate')
                 position_y = self.check_boundaries(position_y + predict_increment * math.sin(angle), 'y_coordinate')
 
@@ -1075,8 +1077,9 @@ class Drone:
                 state = self.predict(position_x, position_y, self.observation_size)
                 state = tf.expand_dims(tf.convert_to_tensor(state), 0)
                 goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-                goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-                angle = self.path_planning_model([state, goal_distance_tf])
+                # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+                # angle = self.path_planning_model([state, goal_distance_tf])
+                angle = self.path_planning_model(state)
                 position_x = self.check_boundaries(position_x + predict_increment * math.cos(angle), 'x_coordinate')
                 position_y = self.check_boundaries(position_y + predict_increment * math.sin(angle), 'y_coordinate')
                 control_points_x.append(position_x)
@@ -1085,8 +1088,9 @@ class Drone:
                 state = self.predict(position_x, position_y, self.observation_size)
                 state = tf.expand_dims(tf.convert_to_tensor(state), 0)
                 goal_distance = np.round(abs(np.array([self.position[x], self.position[y]]) - np.array([self.goal[x], self.goal[y]])), 2)/[self.map_dimension_x, self.map_dimension_y]
-                goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
-                angle = self.path_planning_model([state, goal_distance_tf])
+                # goal_distance_tf = tf.expand_dims(tf.convert_to_tensor(goal_distance), 0)
+                # angle = self.path_planning_model([state, goal_distance_tf])
+                angle = self.path_planning_model(state)
                 position_x = self.check_boundaries(position_x + predict_increment * math.cos(angle), 'x_coordinate')
                 position_y = self.check_boundaries(position_y + predict_increment * math.sin(angle), 'y_coordinate')
 
@@ -1124,7 +1128,7 @@ class Drone:
             vertex = np.reshape(borders, [-1, 2])
             max_x, max_y = np.max(vertex[:, 0]), np.max(vertex[:, 1])
             min_x, min_y = np.min(vertex[:, 0]), np.min(vertex[:, 1])
-            external_vertex = np.array([[min_x+correction_index, min_y+correction_index],[min_x+correction_index, max_y-correction_index],[max_x-correction_index, max_y-correction_index],[max_x-correction_index, min_y+correction_index]])
+            external_vertex = np.array([[min_x+correction_index, min_y+correction_index], [min_x+correction_index, max_y-correction_index], [max_x-correction_index, max_y-correction_index], [max_x-correction_index, min_y+correction_index]])
             if len(np.unique(external_vertex, axis=0)) >= 4:
                 self.fill_rectangles(external_vertex)
 
