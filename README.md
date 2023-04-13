@@ -10,7 +10,7 @@ _G. Battocletti, R. Urban, S. Godio and G. Guglieri, "RL-based Path Planning for
 
 Or using the follwing bibtex entry:
 
-	@inbook{battocletti2021,
+	@inbook{battocletti2021rl,
 		title={RL-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments},
 		author={Battocletti, Gianpietro and Urban, Riccardo and Godio, Simone and Guglieri, Giorgio},
 		booktitle={AIAA AVIATION 2021 FORUM},
