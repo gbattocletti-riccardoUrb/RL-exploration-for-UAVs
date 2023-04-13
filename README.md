@@ -1,11 +1,23 @@
 # Reinforcement Learning-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments
 
-## Intro 
+The repository contains the code developed for our thesis project in 2021 while pursuing the MSc in Mechatronic Engineering at Politecnico di Torino (Italy). The title of the thesis is 'Reinforcement Learning-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments'. The project regards the coordination of a fleet of UAVs for the cooperative exploration of indoor environments.
 
-This repository contains a collection of the files produced during the Master Thesis in Mechatronic Engineering we pursued in 2021 at Politecnico di Torino (Italy). The title of the thesis is "Reinforcement Learning-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments". A good overview of the project can be found in the paper we presented at the 2021 AIAA forum. In the paper, the main idea behind the project is explained, along with some technical detail about the development and implementation of the algorithm. Moreover, all the relevant results are presented and discussed. The paper is available on [ResearchGate](https://www.researchgate.net/publication/353530217_RL-based_Path_Planning_for_Autonomous_Aerial_Vehicles_in_Unknown_Environments). If you want a more in-depth analysis of the algorithm you can contact us and ask for a copy of the thesis, where the development and implementation of the algorithm is discussed in detail.
+The complete thesis in which this project is described can be found at [this link](https://webthesis.biblio.polito.it/secure/19281/1/tesi.pdf). A paper with the main results from this work sa presented at the 2021 AIAA Aviation Forum. The paper can be read on the [AIAA conference website](https://arc.aiaa.org/doi/pdf/10.2514/6.2021-3016) or on [ResearchGate](https://www.researchgate.net/publication/353530217_RL-based_Path_Planning_for_Autonomous_Aerial_Vehicles_in_Unknown_Environments).
 
-The files collected in this folder regard the simulation environment creation, the RL agents training and the simulation of the UAVs operations used to produce all the numeric results. Below, a brief description of the project - and then of each folder role in it - can be found.
+If you use or modify parts of this project in your work, please cite it as:
 
+_G. Battocletti, R. Urban, S. Godio and G. Guglieri, "RL-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments," AIAA AVIATION 2021 FORUM, 2021._ 
+
+Or using the follwing bibtex entry:
+
+	@inbook{battocletti2021,
+		title={RL-based Path Planning for Autonomous Aerial Vehicles in Unknown Environments},
+		author={Battocletti, Gianpietro and Urban, Riccardo and Godio, Simone and Guglieri, Giorgio},
+		booktitle={AIAA AVIATION 2021 FORUM},
+		year={2021},
+		doi={https://doi.org/10.2514/6.2021-3016}
+	}  
+	
 ## Project description
 
 The main goal of the project is to use Reinforcement Learning (RL) to implement an *exploration algorithm* capable of driving a small fleet of UAVs in the exploration of an unknown environment. This kind of task presents several different challenges. In fact, each drone must be capable of moving in space without hitting any obstacle or other drones. At the same time, it has to continue the exploration task - or any other task assigned to it. While performing these tasks, the drones must also communicate with each other in order to coordinate the exploration following a common strategy and share useful information to optimise the execution of the task. All these issues have to be solved and their solutions merged in an organic algorithm. The focus of the project is on the sections of algorithm regarding path planning, obstacle avoidance and exploration coordination. 
@@ -44,8 +56,8 @@ This repository contains several folder, each one corresponding to a different d
 
 ## Notes
 
-It is worth mentioning that, during the training process, we used the website *wandb* (aka "Weight and Biases", https://wandb.ai/) to log some useful training information. Moreover, we used the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. In the same way, it could be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
+During the development of the project, and in particular in the NNs training process, we used the website Weight and Biases (https://wandb.ai/) to log useful training information, and the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to obtain the computational power required to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. For the same reason, it may be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
 
 ## Contacts
 
-For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it. Here on GitHub you can also visit our personal profiles https://github.com/gbattocletti and https://github.com/RiccardoUrb.
+For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it.
