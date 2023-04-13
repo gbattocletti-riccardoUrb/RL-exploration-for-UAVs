@@ -58,6 +58,8 @@ This repository contains several folder, each one corresponding to a different d
 
 During the development of the project, and in particular in the NNs training process, we used the website Weight and Biases (https://wandb.ai/) to log useful training information, and the HPC cluster of Politecnico di Torino (https://hpc.polito.it/) to obtain the computational power required to perform the trainings. Therefore, it could be necessary to comment or modify some lines in the main files in order to be able to succesfully start the trainings. For the same reason, it may be necessary to modify the path to some folder (e.g. the training maps folder) to match the actual location of the directories on your PC.
 
+Another useful link is this [YouTube tutorial](https://www.youtube.com/watch?v=KZFn0dvPZUQ) on the setup of the tensorflow environment (with support for GPU cuda) that is used during the training of the planning agents.
+
 ## Contacts
 
 For any question or suggestion feel free to contact us at battocletti.gianpietro@gmail.com or riccardourban@hotmail.it.
