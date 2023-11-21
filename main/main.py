@@ -21,27 +21,31 @@ def get_exploration_percentage(drone_list):
 def main():
     begin_time = time.time()
 
+    # path settings
+    os.chdir("..")
+    main_dir = os.getcwd()
+
     # setup for animation
     max_iterations = 100
     show_animation = True
     save_animation = False
     video_duration = 600         # [s]
-    media_file_name = join(os.getcwd(), 'Media', 'animation_coverage.mp4')
+    media_file_name = join(main_dir, 'Media', 'animation_coverage.mp4')
 
     # RL model
     path_planning_model_number = '22'
     local_minima_path_planning_model_number = '12_2b'      #'12_2b'
-    coverage_model_number = '21_4'                      # 11_5
-    observation_size = 75
-    local_minima_observation_size = 25
-    coverage_observation_size = 200
-    path_planning_model_dir = join(os.getcwd(), 'models', 'actor_' + str(path_planning_model_number))
-    local_minima_path_planning_model_dir = join(os.getcwd(), 'models', 'actor_' + str(local_minima_path_planning_model_number))
-    coverage_model_dir = join(os.getcwd(), 'models', 'coverage_actor_' + str(coverage_model_number))
+    coverage_model_number = '11_5'                      # 11_5  21_4
+    observation_size = 75                               #TODO: this value must be set automatically!
+    local_minima_observation_size = 25                  #TODO: this value must be set automatically!
+    coverage_observation_size = 200                     #TODO: this value must be set automatically!
+    path_planning_model_dir = join(main_dir, 'models', 'actor_' + str(path_planning_model_number))
+    local_minima_path_planning_model_dir = join(main_dir, 'models', 'actor_' + str(local_minima_path_planning_model_number))
+    coverage_model_dir = join(main_dir, 'models', 'coverage_actor_' + str(coverage_model_number))
 
     # generate world
-    map_number = '46'
-    maps_dir = join(os.getcwd(), 'maps', 'validation maps', 'map_' + str(map_number) + '.mat')
+    map_number = 'C'
+    maps_dir = join(main_dir, 'maps', 'validation maps', 'map_' + str(map_number) + '.mat')
     world = Map()
     world.convert_MATLAB_map(maps_dir)
     world.plot_map()
@@ -85,7 +89,7 @@ def main():
         drone.set_vision_settings(vision_range, max_vision_angle, angle_resolution)
         drone.set_RL_path_planning_model(load_model(path_planning_model_dir, compile=False))
         drone.set_local_minima_path_planning_model(load_model(local_minima_path_planning_model_dir, compile=False))
-        drone.set_RL_coverage_model(load_model(join(os.getcwd(), 'models', 'coverage_actor_11_5'), compile=False))
+        drone.set_RL_coverage_model(load_model(coverage_model_dir, compile=False))
         drone.set_max_steps_with_single_goal(max_steps_with_single_goal)
         drone.set_observation_size(observation_size)
         drone.set_local_minima_observation_size(local_minima_observation_size)

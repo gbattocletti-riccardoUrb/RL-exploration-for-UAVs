@@ -835,7 +835,7 @@ class Drone:
             rescaled_state = max_pool_2d(x)
             rescaled_state = np.reshape(rescaled_state, [self.coverage_observation_size, self.coverage_observation_size])
         else:
-            raise Warning("The dimension of the map is not scalable for this model")
+            raise Warning("The dimension of the map is not scalable for this coverage model")
         return rescaled_state
 
     def oscillation_detection(self):
